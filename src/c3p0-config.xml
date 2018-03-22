@@ -2,10 +2,10 @@
 <c3p0-config>
     <named-config name="expbook">
         <!-- 指定连接数据源的基本属性 -->
-        <property name="user">qfnu</property>
-        <property name="password">qfnuzlx</property>
+        <property name="user"></property>
+        <property name="password"></property>
         <property name="driverClass">oracle.jdbc.driver.OracleDriver</property>
-        <property name="jdbcUrl">jdbc:oracle:thin:@202.194.176.132:1521:expbook</property>
+        <property name="jdbcUrl">jdbc:oracle:thin:@host:port:sid</property>
 
         <!-- 若数据库中连接数不足时, 一次向数据库服务器申请多少个连接 -->
         <property name="acquireIncrement">5</property>
