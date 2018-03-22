@@ -80,7 +80,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li class="floatL"></li> -->
 		</ul>
 	</div>
-	
+	<%
+		request.setCharacterEncoding("utf-8");
+		String name = request.getParameter("xm");
+		String idNumber = request.getParameter("sfzh");
+		List<TQuantity> result = null;
+		QuantityDAO dao = new QuantityDAO();
+		Connection connection = null;
+	    try {
+	        connection = JdbcTools.getConnection();
+	        String sql = "select name,term,note,idnumber,round(quantity,1) quantity,dept from work_quantity where name = ? and idnumber = ? order by term";
+	        result = dao.getForList(connection, sql, name, idNumber);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        JdbcTools.releaseDB(null, null, null, connection);
+	    }
+	%>
 	<FORM METHOD=POST ACTION="" id="search_form">
 		<div class="register-box">
 			<label for="username" class="username_label">姓&nbsp;&nbsp;名
@@ -90,13 +106,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<input type="text" name="sfzh" id="sfzh">
 			</label>
 			<a href="#" class="button small gray" onclick="query()">查询</a>
+			<%if (result != null && result.size() > 0) { %>
+			<a href="print.jsp" class="button small gray">打印</a>
+			<%} %>
 		</div>
 	</FORM>
 	<%
-		request.setCharacterEncoding("utf-8");
-		String name = request.getParameter("xm");
-		String idNumber = request.getParameter("sfzh");
-		if (name != null && idNumber != null) {
+		if (result != null) {
 			out.println("<table class='m-tb2'>");
 			out.println("<tr>");
 				out.println("<th width=120>姓名</th>");
@@ -104,30 +120,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				out.println("<th width=260>学年学期</th>");
 				out.println("<th width=200>实验教学工作量</th>");
 			out.println("</tr>");
-
-			QuantityDAO dao = new QuantityDAO();
-			Connection connection = null;
-		    try {
-		        connection = JdbcTools.getConnection();
-		        String sql = "select name,term,note,idnumber,round(quantity,1) quantity,dept from work_quantity where name = ? and idnumber = ? order by term";
-		        List<TQuantity> result = dao.getForList(connection, sql, name, idNumber);
-		        for (TQuantity quantity : result) {
-		        	out.println("<tr>");
-					out.println("<td>" + quantity.getName() + "</td>");
-					out.println("<td>" + quantity.getDept() + "</td>");
-					out.println("<td>" + quantity.getTerm() + "</td>");
-					out.println("<td>" + quantity.getQuantity() + "</td>");
+			
+	        for (TQuantity quantity : result) {
+	        	out.println("<tr>");
+				out.println("<td>" + quantity.getName() + "</td>");
+				out.println("<td>" + quantity.getDept() + "</td>");
+				out.println("<td>" + quantity.getTerm() + "</td>");
+				out.println("<td>" + quantity.getQuantity() + "</td>");
 				out.println("</tr>");
-		        }
-		    } catch (Exception e) {
-		        e.printStackTrace();
-		    } finally {
-		        JdbcTools.releaseDB(null, null, null, connection);
-		    }			
-
+	        }
 			out.println("</table>");
 			
 		}
+
+	session.setAttribute("result", result);
 	%>
 	<br><br><br><br>
 	<table>
