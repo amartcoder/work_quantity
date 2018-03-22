@@ -1,0 +1,65 @@
+@charset "utf-8";
+/* CSS Document */
+
+.date {
+	text-align: left; padding-bottom: 0px; padding-left: 10px; width: auto; padding-right: 10px; float: left; color: #333333; padding-top: 0px;
+	line-height:25px;}
+.top2{
+	/*background:url(../images/logo.jpg) no-repeat;*/
+        /*background:ur1(../images/focus1.swf) no-repeat;*/
+	height:120px;}
+.top3{
+	height:32px;
+	line-height:32px;}
+.periodical_img {
+	height:37px;
+	line-height:35px;
+        width:111px;
+	text-align:center;
+	float:left;
+	background:url(../images/menu_bg.jpg) repeat-x;}
+.periodical_img a {
+	color:#fff;
+	font-size:14px;
+	font-weight:bold;}
+.periodical_img_on {
+	background: url(../images/hover_bg.jpg) repeat-x;
+	height:37px;
+	line-height:35px;
+	width:111px;
+	text-align:center;
+	float:left;}
+.periodical_img_on a {
+	font-size:14px;
+	font-weight:bold;
+	color:#fff;}
+
+
+.drop_dwon {
+	display:none;
+	margin: 0;
+	/*background:url(../images/menu_list_bg.png) no-repeat;*/
+        background-color: #218aa0;
+	width:111px;
+	position:relative;
+ 	z-index:999;
+        height:30px;}
+.onemenulayout {
+	float: none;
+	display: inline;
+	width:98px;
+	position:relative;
+	z-index:999;}
+#currlayout a {
+	width:76px;
+	color:#24313C;
+	font-size:12px;
+	position:relative;
+	z-index:999;
+	font-weight:normal;}
+#sss {
+	/*background-color: #ab3b5b;*/
+	height:30px;}
+.secondnavmousemove{
+        background-color:#b11111;
+        height:30px;}
